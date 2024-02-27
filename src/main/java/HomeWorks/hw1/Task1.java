@@ -12,8 +12,11 @@ public class Task1 {
         WebDriver webDriver = new ChromeDriver();
 
         webDriver.get("https://rozetka.com.ua/");
-       WebElement image = webDriver.findElement(By.xpath("//img[@alt='Rozetka Logo']"));
-        Assert.isTrue(image.isDisplayed(),"Image not found");
+
+        WebElement image = webDriver.findElement(By.xpath("//img[@alt='Rozetka Logo']"));
+
+        Assert.isTrue(image.isDisplayed(), "Image not found");
+
         webDriver.quit();
     }
 }
