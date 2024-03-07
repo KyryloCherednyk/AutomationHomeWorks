@@ -11,16 +11,12 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 import java.util.List;
 
-public class HW3 extends BaseTest{
+public class HW3 extends BaseTest {
+
     @Test
-    public void hw()
-    {
-        String searchValue ="тумба";
-        String result1 = "Меблі(тумба мобільна,тумба,тумба приставна)";
-        String result2 = "Комунальне некомерційне підприємство Білоцерківської міської ради \"Білоцерківська міська лікарня №2\"";
-        String result3 ="Завершена";
-        String result4 ="98 940,00\n" +
-                "UAH";
+    public void hw() {
+        String searchValue = "тумба";
+
         webDriver.get("https://prozorro.gov.ua/en");
 
         WebElement input = webDriver
@@ -29,19 +25,36 @@ public class HW3 extends BaseTest{
         input.sendKeys(searchValue);
         input.sendKeys(Keys.ENTER);
 
+        String result1 = new WebDriverWait(webDriver, Duration.ofSeconds(15))
+                .until(ExpectedConditions.presenceOfElementLocated
+                        (By.xpath("//li[@class='search-result-card__wrap'][1]//a[@class='item-title__title']")))
+                .getText().trim();
+
+        String result2 = new WebDriverWait(webDriver, Duration.ofSeconds(15))
+                .until(ExpectedConditions.presenceOfElementLocated
+                        (By.xpath("//li[@class='search-result-card__wrap'][1]//span[@class='_setter __v_isRef __v_isReadonly effect _cacheable']")))
+                .getText().trim();
+
+        String result3 = new WebDriverWait(webDriver, Duration.ofSeconds(15))
+                .until(ExpectedConditions.presenceOfElementLocated
+                        (By.cssSelector("div.search-result-card__description")))
+                .getText().trim();
+
+        String textElement1 = new WebDriverWait(webDriver, Duration.ofSeconds(15))
+                .until(ExpectedConditions.presenceOfElementLocated
+                        (By.cssSelector("p.app-price__amount"))).getText();
+
+        double result4 = Double.parseDouble(textElement1.replaceAll("[^0-9\\.]", ""));
+
+
         List<WebElement> itemHeaders = webDriver
                 .findElements(By.xpath("//div[@class='search-result-card']//a[@class='item-title__title']"));
 
         itemHeaders.get(0).click();
 
-        String actualResult = new WebDriverWait(webDriver, Duration.ofSeconds(15))
-                .until(ExpectedConditions.presenceOfElementLocated
-                        (By.xpath("//div[@class='tender--head--title col-sm-9']")))
-                .getText().trim();
-
         String actualResult1 = new WebDriverWait(webDriver, Duration.ofSeconds(15))
                 .until(ExpectedConditions.presenceOfElementLocated
-                        (By.xpath("//td[contains(., 'Найменування:')]/following-sibling::td")))
+                        (By.xpath("//div[@class='tender--head--title col-sm-9']")))
                 .getText().trim();
 
         String actualResult2 = new WebDriverWait(webDriver, Duration.ofSeconds(15))
@@ -49,17 +62,27 @@ public class HW3 extends BaseTest{
                         (By.xpath("//span[@class='marked']")))
                 .getText().trim();
 
-        String actualResult3 = new WebDriverWait(webDriver, Duration.ofSeconds(20))
+        String actualResult3 = new WebDriverWait(webDriver, Duration.ofSeconds(15))
                 .until(ExpectedConditions.presenceOfElementLocated
-                        (By.xpath("//div[@class='green tender--description--cost--number']/strong")))
+                        (By.cssSelector("td.col-sm-6")))
                 .getText().trim();
 
+        int index = result3.lastIndexOf("•");
+        if (index != -1) {
+            result3 = result3.substring(0, index).trim();
+        }
 
-        Assert.assertEquals(actualResult,result1,"Search value is incorrect");
-        Assert.assertEquals(actualResult1,result2,"Search value is incorrect");
-        Assert.assertEquals(actualResult2,result3,"Search value is incorrect");
-        Assert.assertEquals(actualResult3,result4,"Search value is incorrect");
+        String textElement2 = new WebDriverWait(webDriver, Duration.ofSeconds(15))
+                .until(ExpectedConditions.presenceOfElementLocated
+                        (By.cssSelector("div.green.tender--description--cost--number strong"))).getText();
 
+        double actualResult4 = Double.parseDouble(textElement2.replaceAll("[^0-9\\.]", ""));
+
+
+        Assert.assertEquals(result1, actualResult1, "Search value is incorrect");
+        Assert.assertEquals(result2, actualResult2, "Search value is incorrect");
+        Assert.assertEquals(result3, actualResult3, "Search value is incorrect");
+        Assert.assertEquals(result4, actualResult4, "Search value is incorrect");
     }
 
 }
