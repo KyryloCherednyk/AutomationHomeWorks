@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name = "Positive Tests">
+    <test name="Positive Search">
+        <groups>
+            <run>
+                <include name="positive" />
+            </run>
+        </groups>
+        <classes>
+            <class name="main.java.HomeWorks.HW4" />
+        </classes>
+    </test>
+</suite>
