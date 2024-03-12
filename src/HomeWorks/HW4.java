@@ -1,4 +1,4 @@
-package main.java.HomeWorks;
+package HomeWorks;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;

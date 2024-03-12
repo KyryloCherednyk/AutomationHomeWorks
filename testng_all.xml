@@ -2,7 +2,7 @@
 <suite name = "All Tests">
     <test name="All">
         <classes>
-            <class name="main.java.HomeWorks.HW4" />
+            <class name="HomeWorks.HW4" />
         </classes>
     </test>
 </suite>
