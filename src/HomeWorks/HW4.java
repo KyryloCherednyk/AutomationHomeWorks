@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 import java.util.List;
 
-public class HW4 extends HomeWorks.BaseTest {
+public class HW4 extends BaseTest {
 
     @DataProvider(name = "searchQueries")
     public Object[][] searchQueries() {
