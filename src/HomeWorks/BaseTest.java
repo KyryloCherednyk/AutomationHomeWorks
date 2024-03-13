@@ -13,7 +13,7 @@ import java.time.Duration;
 public class BaseTest {
     public WebDriver webDriver;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initDriver() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--window-size=1280,720");
@@ -22,7 +22,7 @@ public class BaseTest {
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
 
         webDriver.quit();

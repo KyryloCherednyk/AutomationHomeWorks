@@ -120,7 +120,7 @@ public class HW4 extends BaseTest {
         input.sendKeys(inputSearch);
         input.sendKeys(Keys.ENTER);
 
-        WebElement searchResults = webDriver.findElement(By.cssSelector("li.search-result-card__wrap a.item-title__title"));
+        WebElement searchResults = webDriver.findElement(By.xpath("//p[@class='search-result__empty'][1]"));
         Assert.assertTrue(searchResults.isDisplayed(), "Search results are not displayed");
 
     }
