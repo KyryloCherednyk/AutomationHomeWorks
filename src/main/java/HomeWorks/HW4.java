@@ -33,7 +33,7 @@ public class HW4 extends BaseTest {
         input.clear();
         input.sendKeys(query);
         input.sendKeys(Keys.ENTER);
-
+        takeScreenshot(webDriver);
         WebElement searchResults = webDriver.findElement(By.cssSelector("li.search-result-card__wrap a.item-title__title"));
         Assert.assertTrue(searchResults.isDisplayed(), "Search results are not displayed for query: " + query);
 
@@ -119,7 +119,7 @@ public class HW4 extends BaseTest {
         input.clear();
         input.sendKeys(inputSearch);
         input.sendKeys(Keys.ENTER);
-
+        takeScreenshot(webDriver);
         WebElement searchResults = webDriver.findElement(By.xpath("//p[@class='search-result__empty'][1]"));
         Assert.assertTrue(searchResults.isDisplayed(), "Search results are not displayed");
 
