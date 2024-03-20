@@ -1,5 +1,8 @@
 package HomeWorks;
 
+import io.qameta.allure.Attachment;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -22,10 +25,20 @@ public class BaseTest {
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 
+    @Attachment(type = "image/png")
+    public byte[] takeScreenshot(WebDriver driver) {
+        byte[] result = null;
+        if (driver != null) {
+            result = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+        }
+        return result;
+    }
+
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
 
         webDriver.quit();
     }
 }
+
 
