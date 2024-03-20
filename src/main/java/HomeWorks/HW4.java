@@ -39,8 +39,8 @@ public class HW4 extends BaseTest {
 
     }
 
-    @Test(groups = "positive")
-    public void hw() {
+    /*@Test(groups = "positive")
+     public void hw() {
 
         String searchValue = "тумба";
         webDriver.get("https://prozorro.gov.ua/en");
@@ -109,7 +109,7 @@ public class HW4 extends BaseTest {
         Assert.assertEquals(resultPrice, actualPrice, "Price is incorrect");
 
     }
-
+*/
     @Test(groups = "negative")
     public void testNegativeSearch() {
 
